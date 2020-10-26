@@ -105,6 +105,18 @@ def test_init_factory_signature(msg):
     """  # noqa: E501 line too long
     )
 
+    assert (
+        msg(m.TestFactory2.__init__.__doc__)
+        == """
+        __init__(self: m.factory_constructors.TestFactory2, arg0: m.factory_constructors.tag.pointer_tag, arg1: int) -> None
+        __init__(self: m.factory_constructors.TestFactory2, arg0: m.factory_constructors.tag.unique_ptr_tag, arg1: str) -> None
+        __init__(self: m.factory_constructors.TestFactory2, arg0: m.factory_constructors.tag.move_tag) -> None
+
+        This is one part of the docstring.
+        This is the other part of the docstring.
+    """  # noqa: E501 line too long
+    )
+
 
 def test_init_factory_casting():
     """Tests py::init_factory() wrapper with various upcasting and downcasting returns"""
