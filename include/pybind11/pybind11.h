@@ -453,10 +453,12 @@ protected:
         /* Create a nice pydoc rec including all signatures and
            docstrings of the functions in the overload chain */
         if (chain && options::show_function_signatures()) {
-            // First a generic signature
-            signatures += rec->name;
-            signatures += "(*args, **kwargs)\n";
-            signatures += "Overloaded function.\n\n";
+            for (auto it = chain_start; it != nullptr; it = it->next) {
+                signatures += rec->name;
+                signatures += it->signature;
+                signatures += "\n";
+            }
+            signatures += "\nOverloaded function.\n\n";
         }
         // Then specific overload signatures
         bool first_user_def = true;

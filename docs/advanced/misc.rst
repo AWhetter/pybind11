@@ -302,6 +302,37 @@ Note that changes to the settings affect only function bindings created during t
 lifetime of the ``options`` instance. When it goes out of scope at the end of the module's init function,
 the default settings are restored to prevent unwanted side effects.
 
+Overloaded functions
+--------------------
+
+For overloaded functions, all function overload signatures are prepended to the
+docstring of a function, and all docstrings are concatenated together into sections
+that are separated by their function signature.
+
+For example:
+
+.. code-block:: pycon
+
+    >>> help(example.add)
+
+    add(...)
+     |      add(arg0: int, arg1: int) -> int
+     |      add(arg0: float, arg1: float) -> float
+     |
+     |      Overloaded function.
+     |
+     |      1. add(arg0: int, arg1: int) -> int
+     |
+     |      Add two integers together.
+     |
+     |      2. add(arg0: float, arg1: float) -> float
+     |
+     |      Add two floating points numbers together.
+
+Calling ``options.disable_function_signatures()``, as shown previously,
+will cause docstrings to be generated without the prepended function signatures
+and without the section headings.
+
 .. [#f4] http://www.sphinx-doc.org
 .. [#f5] http://github.com/pybind/python_example
 
